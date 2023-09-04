@@ -1,0 +1,130 @@
+#user {
+  display: flex;
+  align-items: center;
+  padding: 4px 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08);
+  .img {
+    width: 35px;
+    margin: 0 1%;
+    img {
+      width: 100%;
+    }
+  }
+  .title {
+    display: flex;
+    flex: 1;
+    font-weight: 400;
+    font-size: 20px;
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: black;
+    cursor: pointer;
+    span {
+      font-size: 13px;
+      font-weight: 600;
+      color: #3d3d3d;
+    }
+    span:first-child {
+      display: inline-block;
+      color: white;
+      width: 15px;
+      background-color: #00897b;
+      border-radius: 50%;
+      padding: 10px;
+      font-weight: 700;
+      margin-right: 10px;
+      font-size: 12px;
+    }
+  }
+}
+.inforUser {
+  text-align: center;
+  .letter {
+    background-color: #00897b;
+    width: 37px;
+    margin: auto;
+    border-radius: 52px;
+    font-size: 23px;
+    color: white;
+    font-weight: 600;
+    padding: 10px;
+  }
+  .name {
+    font-size: 17px;
+    font-weight: 700;
+    color: #008983;
+  }
+  .subname {
+    background-color: #cec2e8;
+    margin: 0 17%;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 3px 0;
+  }
+  .switch {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8%;
+  }
+  .left {
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .right {
+    color: #ff5454;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+}
+.ant-popover-inner {
+  width: 260px;
+  padding: 20px !important;
+}
+#container {
+  .ant-col.content.css-dev-only-do-not-override-190m0jy {
+    background-color: bisque;
+  }
+  .sidebar {
+    .listItem {
+      .item {
+        display: flex;
+        margin: 5px;
+        padding: 8px;
+        color: #343a40;
+        span.anticon.anticon-appstore {
+          width: 22px;
+          height: 22px;
+        }
+        p {
+          margin: 0;
+          margin-left: 6%;
+          font-weight: 500;
+        }
+        .left {
+          display: flex;
+          flex: 1;
+        }
+      }
+      .item.active {
+        background-color: #f2f6f9;
+      }
+      .sub {
+        margin-left: 7%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  #user {
+    .title {
+      display: none;
+    }
+  }
+}

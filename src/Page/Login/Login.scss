@@ -1,0 +1,85 @@
+#login {
+  #wrapperLogin {
+    display: flex;
+    align-items: center;
+    background-color: #da2a1c;
+    color: white;
+    font-size: 23px;
+    padding: 5px 24px;
+    font-weight: 400;
+    .img {
+      width: 58px;
+      img {
+        width: 100%;
+      }
+    }
+    .title {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+    }
+  }
+  #container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url(http://wlp.howizbiz.com/static/img/footerLogin.cf032540.svg);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: auto;
+    .form {
+      width: 360px;
+      padding: 30px;
+      background-color: white;
+      border-radius: 25px;
+      box-shadow: rgba(253, 178, 206, 0.47) 0px 2px 20px;
+      .username,
+      .password {
+        margin-bottom: 15px;
+        p {
+          font-size: 10px;
+          color: #ff5353;
+        }
+        span.ant-input-affix-wrapper.css-dev-only-do-not-override-190m0jy {
+          width: 100%;
+          border-radius: 50px;
+          padding: 13px;
+          border: 1px solid #1e1f202e;
+          outline: 1px solid #ff5353;
+        }
+      }
+      button.ant-btn.css-dev-only-do-not-override-190m0jy.ant-btn-primary.ant-btn-block {
+        height: 44px;
+        border-radius: 50px;
+        background-color: #da2a1c;
+        font-size: 15px;
+        font-weight: 500;
+      }
+      button.ant-btn.css-dev-only-do-not-override-190m0jy.ant-btn-link.ant-btn-block {
+        color: #da2a1c;
+        span {
+          font-weight: 600;
+        }
+      }
+      .img {
+        width: 85px;
+        img {
+          width: 100%;
+        }
+      }
+  
+      header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h3 {
+          font-size: 26px;
+          margin: 16px;
+        }
+      }
+    }
+    height: calc(100vh - 100px);
+  }
+}
+
