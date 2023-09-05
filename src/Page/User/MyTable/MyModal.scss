@@ -1,0 +1,30 @@
+.content {
+  .class {
+    img {
+      width: 38px;
+      border-radius: 50px;
+      height: 38px;
+    }
+  }
+}
+.tenCol {
+  display: flex;
+  align-items: center;
+  img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50px;
+  }
+  p {
+    margin-left: 8px;
+  }
+}
+#content {
+  .table {
+    .action {
+      display: flex;
+      justify-content: space-evenly;
+      color: #da2a1c;
+    }
+  }
+}

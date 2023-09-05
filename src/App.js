@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./Page/Login/Login";
 import User from "./Page/User/User";
 import PrivateRoute from "./Page/Login/PrivateRoute/PrivateRoute";
+import AddNew from "./Page/AddNew/AddNew";
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route element={<PrivateRoute />}>
             <Route path="/user" element={<User />} />
+          </Route>
+          <Route element={<PrivateRoute />}>
+            <Route path="/loai/them-moi" element={<AddNew />} />
           </Route>
         </Routes>
       </Router>

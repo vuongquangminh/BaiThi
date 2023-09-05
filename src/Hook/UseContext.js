@@ -8,6 +8,8 @@ const ContextProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [reloadUser, setReloadUser] = useState(1)
   const [passwordsMatch, setPasswordsMatch] = useState(true)
+  const [total, setTotal] = useState(364)
+
 
   //hook
   const [messageApi, contextHolder] = message.useMessage();
@@ -50,9 +52,12 @@ const ContextProvider = ({ children }) => {
     warning,
     contextHolder,
     setOpen,
+    reloadUser,
     setReloadUser,
     passwordsMatch,
     setPasswordsMatch,
+    total,
+    setTotal,
 
   };
   return <context.Provider value={value}>{children}</context.Provider>;

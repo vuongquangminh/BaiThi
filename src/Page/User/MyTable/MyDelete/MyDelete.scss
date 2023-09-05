@@ -1,0 +1,58 @@
+:where(.css-dev-only-do-not-override-190m0jy).ant-modal .ant-modal-content {
+    overflow: hidden;
+
+}
+// div#\:r4\: {
+//     font-size: 18px;
+//     padding: 15px 0 15px 30px;
+//     color: white;
+//     background-color: #da2a1c;
+// }
+// .ant-modal-header {
+//     margin: 0 !important;
+// }   
+.ant-modal-content {
+    padding: 0 !important;
+    .ant-modal-header {
+        .ant-modal-title {
+            background-color: #da2a1c;
+            color: white;
+            padding: 15px 30px;
+            font-size: 20px;
+        }
+    }
+    .ant-modal-close-x {
+        font-size: 23px;
+        color: white;
+    }
+    .ant-modal-body {
+        >p {
+            padding: 13px 21px;
+            background-color: #fff;
+            color: black;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .content {
+            margin: 29px 22px;
+        }   
+    }
+    .ant-modal-footer {
+        padding: 11px 22px;
+        button.ant-btn.css-dev-only-do-not-override-190m0jy.ant-btn-primary {
+            background-color: #fff;
+            border: 1px solid #da2a1c;
+            color: #da2a1c;
+            .confirm {
+                font-weight: 700;
+            }
+        }
+        button.ant-btn.css-dev-only-do-not-override-190m0jy.ant-btn-default {
+            color: black !important;
+            border-color: #ccc !important;
+            span {
+                font-weight: 700;
+            }
+        }
+    }
+}
