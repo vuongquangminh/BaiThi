@@ -10,7 +10,7 @@ const MyDelete = () => {
   const [text, setText] = useState('')
   const { setTotal, GetTokenFromLocalStorage, setReloadUser, reloadUser } =
     useContext(context);
-  const token = GetTokenFromLocalStorage();
+  const token = GetTokenFromLocalStorage("accessToken");
   const showModal = (e) => {
     setIsModalOpen(true);
     let key = e.target.closest("[data-row-key]");
@@ -23,7 +23,7 @@ const MyDelete = () => {
   const handleOk = (e) => {
     setIsModalOpen(false);
     const deleteApi = async () => {
-      const req = await fetch(`http://wlp.howizbiz.com/api/species/${key}`, {
+      const req = await fetch(`https://wlp.howizbiz.com/api/species/${key}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

@@ -1,0 +1,47 @@
+:where(.css-dev-only-do-not-override-190m0jy).ant-input:hover {
+  border-color: #ccc;
+}
+:where(.css-dev-only-do-not-override-190m0jy).ant-input:focus {
+  box-shadow: none;
+  border: 2px solid #f44336;
+}
+:where(.css-dev-only-do-not-override-190m0jy).ant-input {
+  border-width: 2px;
+  padding: 8px;
+}
+.left p {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.topAdd>p {
+  margin: 0;
+}
+#container #contentAdd p {
+  display: inline-block;
+}
+#container #contentAdd span.warning{
+  color: red;
+  font-weight: 700;
+}
+.bottom .bottomRight {
+  display: flex;
+  flex-direction: column-reverse;
+}
+#container #contentAdd .formAdd2 .body2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.ant-select.css-dev-only-do-not-override-190m0jy.ant-select-single.ant-select-show-arrow.ant-select-show-search {
+  display: block;
+}
+.buttonUpdate {
+  text-align: end;
+  margin-top: 1%;
+}
+.buttonUpdate button {
+  min-width: 120px !important;
+  font-weight: 600;
+  font-size: 16px;
+}

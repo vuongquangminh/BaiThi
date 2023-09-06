@@ -18,7 +18,7 @@ function Login() {
   const navigate = useNavigate();
 
   const HandleLogin = async () => {
-    const url = "http://wlp.howizbiz.com/api/web-authenticate";
+    const url = "https://wlp.howizbiz.com/api/web-authenticate";
     let userData = {
       password: password,
       username: username,
@@ -49,7 +49,7 @@ function Login() {
   };
 
   async function MeData(token) {
-    const url = "http://wlp.howizbiz.com/api/me";
+    const url = "https://wlp.howizbiz.com/api/me";
 
     const response = await fetch(url, {
       method: "GET",
@@ -74,7 +74,7 @@ function Login() {
         <header id="wrapperLogin">
           <div className="img">
             <img
-              src="http://wlp.howizbiz.com/static/img/logoColor.e5de23ce.png"
+              src="https://wlp.howizbiz.com/static/img/logoColor.e5de23ce.png"
               alt=""
             />
           </div>
@@ -89,7 +89,7 @@ function Login() {
             <header>
               <div className="img">
                 <img
-                  src="http://wlp.howizbiz.com/static/img/logoColor.e5de23ce.png"
+                  src="https://wlp.howizbiz.com/static/img/logoColor.e5de23ce.png"
                   alt=""
                 />
               </div>
@@ -119,9 +119,11 @@ function Login() {
               />
               <p>{passError}</p>
             </div>
-            <Button type="primary" block onClick={HandleLogin}>
+            <div tabIndex="0" onKeyDown={HandleLogin}>
+            <Button type="primary" block onClick={HandleLogin} >
               Đăng nhập
             </Button>
+            </div>
             <Button type="link" block>
               Quên mật khẩu
             </Button>

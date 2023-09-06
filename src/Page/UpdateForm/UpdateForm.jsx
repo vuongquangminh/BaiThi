@@ -15,18 +15,46 @@ import Sidebar from "../../Component/Sidebar/Sidebar";
 import Icon from "@mdi/react";
 import { mdiArrowLeft } from "@mdi/js";
 
-import "./AddNew.scss";
+import "./UpdateForm.scss";
 import { useContext, useEffect, useState } from "react";
 import { context } from "../../Hook/UseContext";
 import { useNavigate } from "react-router-dom";
 
-function AddNew() {
+function UpdateForm() {
   const { GetTokenFromLocalStorage, success, contextHolder } =
     useContext(context);
   const token = GetTokenFromLocalStorage("accessToken");
   const userEdit = GetTokenFromLocalStorage("userEdit");
   console.log("jkkkkkk", JSON.parse(userEdit));
+  const dataEdit = JSON.parse(userEdit);
+  const [oldData, setOldData] = useState({});
+  
+  useEffect(() => {
+    setOldData(dataEdit);
+    setId(dataEdit.id);
+    setInitKingdom(dataEdit.kingdom.ten === null || dataEdit.kingdom.ten === "" ? dataEdit.kingdom.ten_khoa_hoc : dataEdit.kingdom.ten_khoa_hoc + " - " + dataEdit.kingdom.ten);
+    setInitPhylumn(dataEdit.phylumn.ten === null || dataEdit.phylumn.ten === "" ? dataEdit.phylumn.ten_khoa_hoc : dataEdit.phylumn.ten_khoa_hoc + " - " + dataEdit.phylumn.ten );
+    setInitClass(dataEdit.class.ten === null || dataEdit.class.ten === "" ? dataEdit.class.ten_khoa_hoc : dataEdit.class.ten_khoa_hoc +  " - " + dataEdit.class.ten);
+    setInitOrder(dataEdit.order.ten === null || dataEdit.order.ten === "" ? dataEdit.order.ten_khoa_hoc : dataEdit.order.ten_khoa_hoc +  "- " + dataEdit.order.ten);
+    setInitFamily(dataEdit.family.ten === null || dataEdit.family.ten === "" ? dataEdit.family.ten_khoa_hoc : dataEdit.family.ten_khoa_hoc +  " - " + dataEdit.family.ten);
+    setInitGunes(dataEdit.genus.ten === null || dataEdit.genus.ten === "" ? dataEdit.genus.ten_khoa_hoc : dataEdit.genus.ten_khoa_hoc +  " - " + dataEdit.genus.ten);
+    
+    
+    setInitTen(dataEdit.ten);
+    setInitTendiaphuong(dataEdit.ten_dia_phuong);
+    setInitTentacgia(dataEdit.ten_tac_gia);
+    setInitTenkhoahoc(dataEdit.ten_khoa_hoc);
+    setInitNguondulieu(dataEdit.nguon_du_lieu);
 
+    setValueGioi(dataEdit.kingdom_id);
+    setValueNganh(dataEdit.phylum_id);
+    setValueLop(dataEdit.class_id);
+    setValueBo(dataEdit.order_id);
+    setValueHo(dataEdit.family_id);
+    setValueChi(dataEdit.genus_id);
+
+  }, [userEdit]);
+  console.log("oldData", oldData);
   const [initKingdom, setInitKingdom] = useState("");
   const [initPhylumn, setInitPhylumn] = useState("");
   const [initClass, setInitClass] = useState("");
@@ -47,14 +75,7 @@ function AddNew() {
   const [initUicnsId, setInitUicnsId] = useState("");
   const [initSachdoId, setInitSachdosId] = useState("");
 
-  const [errTen, setErrTen] = useState(false);
-  const [errTenkhoahoc, setErrTenkhoahoc] = useState("");
-  const [errKingdom, setErrKingdom] = useState("");
-  const [errPhylumn, setErrPhylumn] = useState("");
-  const [errClass, setErrClass] = useState("");
-  const [errOrder, setErrOrder] = useState("");
-  const [errFamily, setErrFamily] = useState("");
-  const [errGenus, setErrGenus] = useState("");
+  const [id, setId] = useState("");
 
   const [gioi, setGioi] = useState([]);
   const [nganh, setNganh] = useState([]);
@@ -65,12 +86,22 @@ function AddNew() {
   const [sachDo, setSachdo] = useState([]);
   const [UICN, setUICN] = useState([]);
 
+  const [errTen, setErrTen] = useState(false);
+  const [errTenkhoahoc, setErrTenkhoahoc] = useState(false);
+
   const [valueGioi, setValueGioi] = useState([]);
   const [valueNganh, setValueNganh] = useState([]);
   const [valueLop, setValueLop] = useState([]);
   const [valueBo, setValueBo] = useState([]);
   const [valueHo, setValueHo] = useState([]);
   const [valueChi, setValueChi] = useState([]);
+
+  const [errKingdom, setErrKingdom] = useState("");
+  const [errPhylumn, setErrPhylumn] = useState("");
+  const [errClass, setErrClass] = useState("");
+  const [errOrder, setErrOrder] = useState("");
+  const [errFamily, setErrFamily] = useState("");
+  const [errGenus, setErrGenus] = useState("");
 
   const navigate = useNavigate();
   const nam = [
@@ -108,7 +139,7 @@ function AddNew() {
   };
   const handeSubmit = () => {
     const dataPost = {
-      // id: id,
+      id: id,
       ten: initTen,
       ten_khoa_hoc: initTenkhoahoc,
       ten_tac_gia: initTentacgia,
@@ -126,8 +157,8 @@ function AddNew() {
     };
     console.log(dataPost);
     const PostApi = async () => {
-      const req = await fetch(`https://wlp.howizbiz.com/api/species`, {
-        method: "POST",
+      const req = await fetch(`https://wlp.howizbiz.com/api/species/${id}`, {
+        method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -304,7 +335,7 @@ function AddNew() {
               <div className="topAdd">
                 <Icon path={mdiArrowLeft} size={1.5} onClick={() => {
                   navigate('/user')
-                }}/>{" "}
+                }}/>
                 <p>
                   {" "}
                   THÔNG TIN VỀ HIỆN TRẠNG LOÀI NGUY CẤP, QUÝ, HIẾM CẦN ĐƯỢC ƯU
@@ -402,6 +433,13 @@ function AddNew() {
                       setInitOrder("");
                       setInitFamily("");
                       setInitGunes("");
+
+                      setValueNganh("");
+                      setValueLop("");
+                      setValueBo("");
+                      setValueHo("");
+                      setValueChi("");
+
                       setErrKingdom("");
                     }}
                     placeholder="Giới"
@@ -436,6 +474,12 @@ function AddNew() {
                       setInitOrder("");
                       setInitFamily("");
                       setInitGunes("");
+
+                      setValueLop("");
+                      setValueBo("");
+                      setValueHo("");
+                      setValueChi("");
+
                       setErrPhylumn("");
                     }}
                     placeholder="Ngành"
@@ -470,6 +514,11 @@ function AddNew() {
                       setInitOrder("");
                       setInitFamily("");
                       setInitGunes("");
+
+                      setValueBo("");
+                      setValueHo("");
+                      setValueChi("");
+
                       setErrClass("");
                     }}
                     placeholder="Lớp"
@@ -503,6 +552,10 @@ function AddNew() {
                       setInitOrder(option.label);
                       setInitFamily("");
                       setInitGunes("");
+
+                      setValueHo("");
+                      setValueChi("");
+
                       setErrOrder("");
                     }}
                     placeholder="Bộ"
@@ -535,6 +588,8 @@ function AddNew() {
                       setValueHo(value);
                       setInitFamily(option.label);
                       setInitGunes("");
+
+                      setValueChi("");
                       setErrFamily("");
                     }}
                     placeholder="Họ"
@@ -689,9 +744,9 @@ function AddNew() {
               </div>
             </div>
 
-            <div className="buttonAdd">
+            <div className="buttonUpdate">
               <Button type="primary" htmlType="submit" onClick={handeSubmit}>
-                Thêm mới
+                Cập nhật
               </Button>
             </div>
           </Col>
@@ -701,4 +756,4 @@ function AddNew() {
   );
 }
 
-export default AddNew;
+export default UpdateForm;

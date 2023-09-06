@@ -13,6 +13,7 @@ import Sidebar from "../../Component/Sidebar/Sidebar";
 function User() {
   const [changPage, setChangePage] = useState("page=1&perpage=10");
   const [search, setSearch] = useState("");
+  const [resetCurrentPage, setCurrentPage] = useState(1)
   const navigate = useNavigate();
   const { total } = useContext(context);
 
@@ -51,8 +52,10 @@ function User() {
                     placeholder="Tìm kiếm theo tên"
                     prefix={<Icon path={mdiMagnify} size={1} />}
                     onChange={(e) => {
+                      // console.log(e)
                       setSearch(e.target.value);
                       setChangePage("page=1&perpage=10");
+                      setCurrentPage(1)
                     }}
                   />
                 </div>
@@ -71,8 +74,10 @@ function User() {
                 defaultPageSize={10}
                 pageSizeOptions={["5", "10", "25", "50"]}
                 defaultCurrent={1}
+                current={resetCurrentPage}
                 onChange={(page, perpage) => {
                   console.log(page + "    " + perpage);
+                  setCurrentPage(page)
                   setChangePage(`page=${page}&perpage=${perpage}`);
                 }}
               />

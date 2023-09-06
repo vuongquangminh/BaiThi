@@ -9,6 +9,7 @@ const ContextProvider = ({ children }) => {
   const [reloadUser, setReloadUser] = useState(1)
   const [passwordsMatch, setPasswordsMatch] = useState(true)
   const [total, setTotal] = useState(364)
+  const [key, setKey] = useState('')
 
 
   //hook
@@ -16,16 +17,16 @@ const ContextProvider = ({ children }) => {
 
 
   //function
-  function GetTokenFromLocalStorage() {
-    return localStorage.getItem("accessToken");
+  function GetTokenFromLocalStorage(key) {
+    return localStorage.getItem(key);
   }
   function SaveTokenToLocalStorage(title, token) {
     localStorage.setItem(title, token);
   }
-  const success = () => {
+  const success = (success) => {
     messageApi.open({
       type: 'success',
-      content: 'This is a success message',
+      content: success,
     });
   };
 
@@ -58,6 +59,7 @@ const ContextProvider = ({ children }) => {
     setPasswordsMatch,
     total,
     setTotal,
+    key, setKey
 
   };
   return <context.Provider value={value}>{children}</context.Provider>;

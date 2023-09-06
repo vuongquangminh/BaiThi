@@ -2,6 +2,8 @@ import { Col, Row } from "antd";
 import Header from "../Header/Header";
 import { AppstoreOutlined, BookOutlined, CaretDownOutlined, EditOutlined, ExceptionOutlined, FallOutlined, ProjectOutlined, UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import Icon from "@mdi/react";
+import { mdiAccount, mdiBookMinusOutline, mdiBookOutline, mdiBookPlusOutline, mdiBookSettingsOutline, mdiCodeNotEqual, mdiLeadPencil, mdiSheep, mdiSortAscending, mdiViewDashboard } from "@mdi/js";
 
 function Sidebar() {
     const [true1, setTrue1] = useState(false);
@@ -12,19 +14,19 @@ function Sidebar() {
           <Col className="sidebar" >
             <div className="listItem">
               <div className="item">
-                <AppstoreOutlined /> <p>Bảng điều khiển</p>
+              <Icon path={mdiViewDashboard} size={1} /> <p>Bảng điều khiển</p>
               </div>
               <div className="item ">
-                <UserOutlined /> <p>Quản lý người dùng</p>
+              <Icon path={mdiAccount} size={1} /> <p>Quản lý người dùng</p>
               </div>
               <div className="item">
-                <ProjectOutlined /> <p>Phân loại học</p>
+              <Icon path={mdiSortAscending} size={1} /> <p>Phân loại học</p>
               </div>
               <div className="item active">
-                <FallOutlined /> <p>Loài nguy cấp quý hiếm</p>
+              <Icon path={mdiSheep} size={1} /> <p>Loài nguy cấp quý hiếm</p>
               </div>
               <div className="item">
-                <EditOutlined /> <p>Bài viết</p>
+              <Icon path={mdiLeadPencil} size={1} /> <p>Bài viết</p>
               </div>
 
               <div
@@ -32,20 +34,20 @@ function Sidebar() {
                 onClick={() => setTrue1((prev) => !prev)}
               >
                 <div className="left">
-                  <ExceptionOutlined /> <p>Phiếu đề xuất</p>
+                <Icon path={mdiCodeNotEqual} size={1} /> <p>Phiếu đề xuất</p>
                 </div>
                 <CaretDownOutlined />
               </div>
               {true1 && (
                 <div className="sub">
                   <div className="item">
-                    <FallOutlined /> <p> Đưa loài vào </p>
+                  <Icon path={mdiBookPlusOutline} size={1} /> <p> Đưa loài vào </p>
                   </div>
                   <div className="item">
-                    <EditOutlined /> <p> Đưa loài ra </p>
+                  <Icon path={mdiBookMinusOutline} size={1} /> <p> Đưa loài ra </p>
                   </div>
                   <div className="item">
-                    <EditOutlined /> <p> Phiếu thông tin </p>
+                  <Icon path={mdiBookOutline} size={1} /> <p> Phiếu thông tin </p>
                   </div>
                 </div>
               )}
@@ -54,7 +56,7 @@ function Sidebar() {
                 onClick={() => setTrue2((prev) => !prev)}
               >
                 <div className="left">
-                  <BookOutlined />
+                <Icon path={mdiBookSettingsOutline} size={1} />
                   <p> Danh mục</p>
                 </div>
                 <CaretDownOutlined />
@@ -62,10 +64,10 @@ function Sidebar() {
               {true2 && (
                 <div className="sub">
                   <div className="item">
-                    <FallOutlined /> <p> Danh mục tĩnh </p>
+                  <Icon path={mdiBookPlusOutline} size={1} /> <p> Danh mục tĩnh </p>
                   </div>
                   <div className="item">
-                    <EditOutlined /> <p> Danh mục động </p>
+                  <Icon path={mdiBookMinusOutline} size={1} /> <p> Danh mục động </p>
                   </div>
                 </div>
               )}

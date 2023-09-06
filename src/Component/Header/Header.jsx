@@ -33,7 +33,7 @@ function Header() {
       </div>
       <div className="img">
         <img
-          src="http://wlp.howizbiz.com/static/img/logoColor.e5de23ce.png"
+          src="https://wlp.howizbiz.com/static/img/logoColor.e5de23ce.png"
           alt=""
         />
       </div>

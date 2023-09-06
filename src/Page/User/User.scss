@@ -96,13 +96,13 @@
     box-shadow: 2px 0px 7px rgba(0, 0, 0, 0.2);
   }
   .ant-col.sidebar.css-dev-only-do-not-override-190m0jy {
-    min-width: 19%;
+    min-width: 17%;
   }
   div#content {
     max-width: 78%;
   }
   .sidebar {
-    width: 300px;
+
     .listItem {
       .item {
         display: flex;
@@ -138,6 +138,9 @@
     flex-flow: wrap;
 
   }
+}
+.table th.ant-table-cell {
+  padding: 17px 12px !important;
 }
 #content {
   margin: 0 33px;
@@ -204,6 +207,10 @@
     text-align: end;
   }
 }
+.footer .ant-select.css-dev-only-do-not-override-190m0jy.ant-select-single.ant-select-show-arrow.ant-select-show-search
+{
+  display: inline-block;
+}
 
 :where(.css-dev-only-do-not-override-190m0jy).ant-pagination
   .ant-pagination-item-active {
@@ -215,11 +222,21 @@
     color: white !important;
   }
 }
+.action >svg {
+  cursor: pointer;
+}
+.topAdd >svg {
+  cursor: pointer;
+}
+.wrapForm .left span {
+  color: red;
+}
 
 @media only screen and (max-width: 650px) {
   #user {
     .title {
       display: none;
+      font-size: 9px;
     }
   }
   #container :where(.css-dev-only-do-not-override-190m0jy).ant-row {
@@ -228,4 +245,70 @@
   #container .ant-col.sidebar.css-dev-only-do-not-override-190m0jy {
     flex: auto;
   }
+
+
+
+
+  #login #container .form {
+    padding: 0;
+  }
+  .ant-col.sidebar.css-dev-only-do-not-override-190m0jy {
+    display: none;
+}
+#container div#content {
+  max-width: 100%;
+}
+#content {
+  margin: 0;
+}
+div#content {
+  padding: 10px;
+}
+.table th.ant-table-cell {
+  padding: 0 !important;
+}
+#container #contentAdd .formAdd1 .right {
+  width: 300px;
+  display: none;
+}
+#container #contentAdd .formAdd2 .body2 {
+  display: block !important;
+}
+#container #contentAdd .formAdd3 .body3 {
+  display: block !important;
+}
+.footer {
+  justify-content: center;
+}
+.footer li.ant-pagination-total-text {
+  display: none;
+}
+
+}
+
+
+
+@media only screen and (min-width: 651px ) and (max-width: 1024px) {
+  #container #contentAdd .formAdd1 .right {
+    display: none ;
+  }
+  #container #contentAdd .formAdd2 .body2 {
+    grid-template-columns: 1fr 1fr ;
+  }
+  #container #contentAdd .formAdd3 .body3 {
+    display: block ;
+}
+#container div#content {
+  max-width: 100%;
+}
+#content {
+  margin: 0;
+}
+div#container {
+  padding: 16px;
+}
+#user .title {
+  font-size: 16px;
+}
+
 }

@@ -4,6 +4,7 @@ import Login from "./Page/Login/Login";
 import User from "./Page/User/User";
 import PrivateRoute from "./Page/Login/PrivateRoute/PrivateRoute";
 import AddNew from "./Page/AddNew/AddNew";
+import UpdateForm from "./Page/UpdateForm/UpdateForm";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
           </Route>
           <Route element={<PrivateRoute />}>
             <Route path="/loai/them-moi" element={<AddNew />} />
+          </Route>
+          <Route element={<PrivateRoute />}>
+            <Route path="/loai/chi-tiet" element={<UpdateForm />} />
           </Route>
         </Routes>
       </Router>
