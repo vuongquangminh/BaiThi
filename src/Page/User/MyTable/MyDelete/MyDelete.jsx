@@ -53,7 +53,7 @@ const MyDelete = () => {
         onCancel={handleCancel}
       >
         <p>
-          Bạn có chắc muốn xóa <b>{text}</b>? Điều này hoàn toàn không thế hoàn
+          Bạn có chắc muốn xóa <b>{text}</b>? Điều này hoàn toàn không thể hoàn
           tác!
         </p>
       </Modal>

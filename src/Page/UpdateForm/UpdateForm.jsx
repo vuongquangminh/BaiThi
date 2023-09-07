@@ -10,7 +10,8 @@ import Sidebar from "../../Component/Sidebar/Sidebar";
 import "./UpdateForm.scss";
 
 function UpdateForm() {
-  const { GetTokenFromLocalStorage, success, contextHolder, nam } = useContext(context);
+  const { GetTokenFromLocalStorage, success, contextHolder, nam } =
+    useContext(context);
   const navigate = useNavigate();
   const token = GetTokenFromLocalStorage("accessToken");
   const userEdit = GetTokenFromLocalStorage("userEdit");
@@ -54,7 +55,7 @@ function UpdateForm() {
     setInitTenkhoahoc(dataEdit.ten_khoa_hoc);
     setInitNguondulieu(dataEdit.nguon_du_lieu);
     setInitSachdoNam(
-      dataEdit.sach_dos[0] ? dataEdit.sach_dos[0].pivot.nam : ""
+      dataEdit.sach_dos[0] ? dataEdit.sach_dos[0].pivot.nam : "2023"
     );
     setInitSachdoId(dataEdit.sach_dos[0] ? dataEdit.sach_dos[0].id : "");
     setInitSachdoTen(
@@ -63,7 +64,7 @@ function UpdateForm() {
         : ""
     );
 
-    setInitUicnsNam(dataEdit.iucns[0] ? dataEdit.iucns[0].pivot.nam : "");
+    setInitUicnsNam(dataEdit.iucns[0] ? dataEdit.iucns[0].pivot.nam : "2023");
     setInitUicnsId(dataEdit.iucns[0] ? dataEdit.iucns[0].id : "");
     setInitUicnsTen(
       dataEdit.iucns[0]
@@ -747,6 +748,8 @@ function UpdateForm() {
                   <div className="head3"> Sách đỏ </div>
                   <div className="bottom3">
                     <div className="bodyInput">
+                      <p className="hientrang">Năm</p>
+
                       <Select
                         showSearch
                         value={initSachdoNam}
@@ -754,7 +757,6 @@ function UpdateForm() {
                         onChange={(value, option) => {
                           setInitSachdoNam(value);
                         }}
-                        placeholder="Search to Select"
                         optionFilterProp="children"
                         filterOption={(input, option) =>
                           (option?.label ?? "").includes(input)
@@ -775,6 +777,8 @@ function UpdateForm() {
                     </div>
 
                     <div className="bodyInput">
+                      <p className="hientrang"> Hiện trạng </p>
+
                       <Select
                         showSearch
                         value={initSachdoTen}
@@ -784,7 +788,6 @@ function UpdateForm() {
                           setInitSachdoTen(option.label);
                           setInitSachdoId(option.value);
                         }}
-                        placeholder="Search to Select"
                         optionFilterProp="children"
                         filterOption={(input, option) =>
                           (option?.label ?? "").includes(input)
@@ -815,6 +818,8 @@ function UpdateForm() {
                   <div className="head3"> IUCN </div>
                   <div className="bottom3">
                     <div className="bodyInput">
+                      <p className="hientrang">Năm</p>
+
                       <Select
                         showSearch
                         value={initUicnsNam}
@@ -822,7 +827,6 @@ function UpdateForm() {
                         onChange={(value) => {
                           setInitUicnsNam(value);
                         }}
-                        placeholder="Search to Select"
                         optionFilterProp="children"
                         filterOption={(input, option) =>
                           (option?.label ?? "").includes(input)
@@ -842,6 +846,8 @@ function UpdateForm() {
                       />
                     </div>
                     <div className="bodyInput">
+                      <p className="hientrang"> Hiện trạng </p>
+
                       <Select
                         showSearch
                         value={initUicnsTen}
@@ -850,7 +856,6 @@ function UpdateForm() {
                           setInitUicnsTen(option.label);
                           setInitUicnsId(option.value);
                         }}
-                        placeholder="Search to Select"
                         optionFilterProp="children"
                         filterOption={(input, option) =>
                           (option?.label ?? "").includes(input)

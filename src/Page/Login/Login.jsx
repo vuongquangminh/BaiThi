@@ -7,13 +7,13 @@ import { context } from "../../Hook/UseContext";
 import "./Login.scss";
 
 function Login() {
-  const { SaveTokenToLocalStorage, setAuthentication, error, contextHolder } = useContext(context);
+  const { SaveTokenToLocalStorage, setAuthentication, error, contextHolder } =
+    useContext(context);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [userError, setUserError] = useState("");
   const [passError, setPassError] = useState("");
-
   const HandleLogin = async () => {
     const url = "https://wlp.howizbiz.com/api/web-authenticate";
     let userData = {

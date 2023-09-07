@@ -10,7 +10,8 @@ import { context } from "../../Hook/UseContext";
 import "./AddNew.scss";
 
 function AddNew() {
-  const { GetTokenFromLocalStorage, success, contextHolder, nam } = useContext(context);
+  const { GetTokenFromLocalStorage, success, contextHolder, nam } =
+    useContext(context);
   const token = GetTokenFromLocalStorage("accessToken");
   const userEdit = GetTokenFromLocalStorage("userEdit");
 
@@ -28,9 +29,9 @@ function AddNew() {
   const [initNguondulieu, setInitNguondulieu] = useState("");
 
   // InitValue phan 3
-  const [initSachdoNam, setInitSachdoNam] = useState("");
+  const [initSachdoNam, setInitSachdoNam] = useState("2023");
   const [initSachdoTen, setInitSachdoTen] = useState("");
-  const [initUicnsNam, setInitUicnsNam] = useState("");
+  const [initUicnsNam, setInitUicnsNam] = useState("2023");
   const [initUicnsTen, setInitUicnsTen] = useState("");
   const [initUicnsId, setInitUicnsId] = useState("");
   const [initSachdoId, setInitSachdosId] = useState("");
@@ -675,6 +676,7 @@ function AddNew() {
                   <div className="head3"> Sách đỏ </div>
                   <div className="bottom3">
                     <div className="bodyInput">
+                      <p className="hientrang">Năm</p>
                       <Select
                         showSearch
                         value={initSachdoNam}
@@ -702,6 +704,7 @@ function AddNew() {
                       />
                     </div>
                     <div className="bodyInput">
+                      <p className="hientrang"> Hiện trạng </p>
                       <Select
                         showSearch
                         value={initSachdoTen}
@@ -741,6 +744,7 @@ function AddNew() {
                   <div className="head3"> IUCN </div>
                   <div className="bottom3">
                     <div className="bodyInput">
+                      <p className="hientrang">Năm</p>
                       <Select
                         showSearch
                         value={initUicnsNam}
@@ -768,6 +772,7 @@ function AddNew() {
                       />
                     </div>
                     <div className="bodyInput">
+                      <p className="hientrang"> Hiện trạng </p>
                       <Select
                         showSearch
                         value={initUicnsTen}
