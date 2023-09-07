@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./MyModal.scss";
+import "./MyTable.scss";
 import { useNavigate } from "react-router-dom";
 import { Table } from "antd";
 import Icon from "@mdi/react";
-import { mdiDeleteOutline, mdiPencil } from "@mdi/js";
+import { mdiPencil } from "@mdi/js";
 import { context } from "../../../Hook/UseContext";
 import MyDelete from "./MyDelete/MyDelete";
 
@@ -144,7 +144,7 @@ const MyTable = ({ changPage, search }) => {
         dataSource={data}
         pagination={false}
         scroll={{
-          y: "100vh",
+          y: "380px",
           x: "100vh",
         }}
       />

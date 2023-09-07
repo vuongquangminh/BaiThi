@@ -120,8 +120,8 @@ function AddNew() {
       order_id: valueBo,
       family_id: valueHo,
       genus_id: valueChi,
-      iucns: [{ nam: initSachdoNam, id: initUicnsId }],
-      sach_dos: [{ nam: initUicnsNam, id: initSachdoId }],
+      iucns: [{ nam:  initUicnsNam, id: initUicnsId }],
+      sach_dos: [{ nam: initSachdoNam, id: initSachdoId }],
       toa_dos: [],
     };
     console.log(dataPost);

@@ -14,6 +14,7 @@ function User() {
   const [changPage, setChangePage] = useState("page=1&perpage=10");
   const [search, setSearch] = useState("");
   const [resetCurrentPage, setCurrentPage] = useState(1)
+  const [perpage, setPerpage] = useState(10)
   const navigate = useNavigate();
   const { total } = useContext(context);
 
@@ -54,7 +55,7 @@ function User() {
                     onChange={(e) => {
                       // console.log(e)
                       setSearch(e.target.value);
-                      setChangePage("page=1&perpage=10");
+                      setChangePage(`page=1&perpage=${perpage}`);
                       setCurrentPage(1)
                     }}
                   />
@@ -78,6 +79,7 @@ function User() {
                 onChange={(page, perpage) => {
                   console.log(page + "    " + perpage);
                   setCurrentPage(page)
+                  setPerpage(perpage)
                   setChangePage(`page=${page}&perpage=${perpage}`);
                 }}
               />
