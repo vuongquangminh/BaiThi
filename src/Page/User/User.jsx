@@ -10,7 +10,7 @@ import Header from "../../Component/Header/Header";
 import Sidebar from "../../Component/Sidebar/Sidebar";
 
 function User() {
-  const { total } = useContext(context);
+  const { total, contextHolder } = useContext(context);
   const [changPage, setChangePage] = useState("page=1&perpage=10");
   const [search, setSearch] = useState("");
   const [resetCurrentPage, setCurrentPage] = useState(1);
@@ -33,6 +33,7 @@ function User() {
   return (
     <>
       <Header />
+      {contextHolder}
       <div id="container">
         <Row>
           {/* Left */}
@@ -73,7 +74,6 @@ function User() {
                 defaultCurrent={1}
                 current={resetCurrentPage}
                 onChange={(page, perpage) => {
-                  console.log(page + "    " + perpage);
                   setCurrentPage(page);
                   setPerpage(perpage);
                   setChangePage(`page=${page}&perpage=${perpage}`);

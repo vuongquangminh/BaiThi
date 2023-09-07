@@ -80,7 +80,6 @@ const MyTable = ({ changPage, search }) => {
               onClick={(e) => {
                 let key = e.target.closest("[data-row-key]");
                 key = key.getAttribute("data-row-key");
-                console.log(key);
                 const getdataOld = async () => {
                   const req = await fetch(
                     `https://wlp.howizbiz.com/api/species/${key}`,
@@ -112,7 +111,6 @@ const MyTable = ({ changPage, search }) => {
         `https://wlp.howizbiz.com/api/species?paginate=true&${changPage}&with=roles,createdBy&search=${search}&inactive=-1`
       );
       const response = await request.json();
-      console.log(response);
       setTotal(response.pagination.total);
       const danhsach = response.list.map((item) => {
         return {
@@ -152,7 +150,6 @@ const MyTable = ({ changPage, search }) => {
               : item.genus.ten,
         };
       });
-      console.log(danhsach);
       setData(danhsach);
     };
     getdata();

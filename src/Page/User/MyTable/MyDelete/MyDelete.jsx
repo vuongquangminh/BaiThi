@@ -8,7 +8,8 @@ const MyDelete = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [key, setKey] = useState("");
   const [text, setText] = useState("");
-  const { GetTokenFromLocalStorage, setReloadUser } = useContext(context);
+  const { GetTokenFromLocalStorage, setReloadUser, success } =
+    useContext(context);
   const token = GetTokenFromLocalStorage("accessToken");
   const showModal = (e) => {
     setIsModalOpen(true);
@@ -31,7 +32,10 @@ const MyDelete = () => {
       console.log(res);
       setReloadUser((prev) => prev + 1);
     };
-    deleteApi();
+    success("Xóa thành công");
+    setTimeout(() => {
+      deleteApi();
+    }, 1000);
   };
   const handleCancel = () => {
     setIsModalOpen(false);

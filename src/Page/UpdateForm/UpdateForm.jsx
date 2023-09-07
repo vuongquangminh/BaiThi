@@ -72,12 +72,12 @@ function UpdateForm() {
     );
 
     //ValueID
-    setValueGioi(dataEdit.kingdom_id);
-    setValueNganh(dataEdit.phylum_id);
-    setValueLop(dataEdit.class_id);
-    setValueBo(dataEdit.order_id);
-    setValueHo(dataEdit.family_id);
-    setValueChi(dataEdit.genus_id);
+    setKingdomID(dataEdit.kingdom_id);
+    setPhylumnID(dataEdit.phylum_id);
+    setClassID(dataEdit.class_id);
+    setOrderID(dataEdit.order_id);
+    setFamilyID(dataEdit.family_id);
+    setGenusID(dataEdit.genus_id);
   }, [userEdit]);
 
   // InitValue Phan loai
@@ -103,22 +103,22 @@ function UpdateForm() {
   const [initSachdoId, setInitSachdoId] = useState("");
 
   // List option
-  const [gioi, setGioi] = useState([]);
-  const [nganh, setNganh] = useState([]);
-  const [lop, setLop] = useState([]);
-  const [bo, setBo] = useState([]);
-  const [ho, setHo] = useState([]);
-  const [chi, setChi] = useState([]);
+  const [listKingdom, setListKingdom] = useState([]);
+  const [listPhylumn, setListPhylumn] = useState([]);
+  const [listClass, setListClass] = useState([]);
+  const [listOrder, setListOrder] = useState([]);
+  const [listFamily, setListFamily] = useState([]);
+  const [listGenus, setListGenus] = useState([]);
   const [sachDo, setSachdo] = useState([]);
   const [UICN, setUICN] = useState([]);
 
   //ValueID
-  const [valueGioi, setValueGioi] = useState([]);
-  const [valueNganh, setValueNganh] = useState([]);
-  const [valueLop, setValueLop] = useState([]);
-  const [valueBo, setValueBo] = useState([]);
-  const [valueHo, setValueHo] = useState([]);
-  const [valueChi, setValueChi] = useState([]);
+  const [kingdomID, setKingdomID] = useState([]);
+  const [phylumnID, setPhylumnID] = useState([]);
+  const [classID, setClassID] = useState([]);
+  const [orderID, setOrderID] = useState([]);
+  const [familyID, setFamilyID] = useState([]);
+  const [genusID, setGenusID] = useState([]);
 
   // Errors
   const [errTen, setErrTen] = useState(false);
@@ -138,12 +138,12 @@ function UpdateForm() {
       ten_tac_gia: initTentacgia,
       ten_dia_phuong: initTendiaphuong,
       nguon_du_lieu: initNguondulieu,
-      kingdom_id: valueGioi,
-      phylum_id: valueNganh,
-      class_id: valueLop,
-      order_id: valueBo,
-      family_id: valueHo,
-      genus_id: valueChi,
+      kingdom_id: kingdomID,
+      phylum_id: phylumnID,
+      class_id: classID,
+      order_id: orderID,
+      family_id: familyID,
+      genus_id: genusID,
       iucns: [{ nam: initUicnsNam, id: initUicnsId }],
       sach_dos: [{ nam: initSachdoNam, id: initSachdoId }],
       toa_dos: [],
@@ -189,7 +189,7 @@ function UpdateForm() {
         success(res.message);
         setTimeout(() => {
           navigate("/user");
-        }, 2000);
+        }, 3000);
         setErrTenkhoahoc(false);
       }
     };
@@ -208,7 +208,7 @@ function UpdateForm() {
         }
       );
       const res = await req.json();
-      setGioi(res);
+      setListKingdom(res);
       // console.log(res)
     };
     getGioi();
@@ -224,8 +224,8 @@ function UpdateForm() {
         }
       );
       const res = await req.json();
-      const data = res.filter((item) => item.parent_id === valueGioi);
-      setNganh(data);
+      const data = res.filter((item) => item.parent_id === kingdomID);
+      setListPhylumn(data);
     };
     getNganh();
     const getLop = async () => {
@@ -240,9 +240,9 @@ function UpdateForm() {
         }
       );
       const res = await req.json();
-      const data = res.filter((item) => item.parent_id === valueNganh);
+      const data = res.filter((item) => item.parent_id === phylumnID);
 
-      setLop(data);
+      setListClass(data);
     };
     getLop();
     const getBo = async () => {
@@ -257,9 +257,9 @@ function UpdateForm() {
         }
       );
       const res = await req.json();
-      const data = res.filter((item) => item.parent_id === valueLop);
+      const data = res.filter((item) => item.parent_id === classID);
 
-      setBo(data);
+      setListOrder(data);
     };
     getBo();
     const getHo = async () => {
@@ -274,9 +274,9 @@ function UpdateForm() {
         }
       );
       const res = await req.json();
-      const data = res.filter((item) => item.parent_id === valueBo);
+      const data = res.filter((item) => item.parent_id === orderID);
 
-      setHo(data);
+      setListFamily(data);
     };
     getHo();
     const getChi = async () => {
@@ -291,8 +291,8 @@ function UpdateForm() {
         }
       );
       const res = await req.json();
-      const data = res.filter((item) => item.parent_id === valueHo);
-      setChi(data);
+      const data = res.filter((item) => item.parent_id === familyID);
+      setListGenus(data);
     };
     getChi();
 
@@ -313,7 +313,7 @@ function UpdateForm() {
       // console.log(res)
     };
     getUICN();
-  }, [valueGioi, valueNganh, valueLop, valueBo, valueHo, valueChi]);
+  }, [kingdomID, phylumnID, classID, orderID, familyID, genusID]);
   return (
     <>
       {contextHolder}
@@ -423,7 +423,7 @@ function UpdateForm() {
                       value={initKingdom}
                       suffixIcon=""
                       onChange={(value, option) => {
-                        setValueGioi(value);
+                        setKingdomID(value);
                         setInitKingdom(option.label);
                         setInitPhylumn("");
                         setInitClass("");
@@ -431,11 +431,11 @@ function UpdateForm() {
                         setInitFamily("");
                         setInitGunes("");
 
-                        setValueNganh("");
-                        setValueLop("");
-                        setValueBo("");
-                        setValueHo("");
-                        setValueChi("");
+                        setPhylumnID("");
+                        setClassID("");
+                        setOrderID("");
+                        setFamilyID("");
+                        setGenusID("");
                         setErrKingdom("");
                       }}
                       placeholder="Giới"
@@ -443,7 +443,7 @@ function UpdateForm() {
                       filterOption={(input, option) =>
                         (option?.label ?? "").includes(input)
                       }
-                      options={gioi.map((item) => {
+                      options={listKingdom.map((item) => {
                         return {
                           value: item.uuid,
                           label: `${item.ten_khoa_hoc} ${
@@ -458,12 +458,12 @@ function UpdateForm() {
                       path={mdiClose}
                       size={1}
                       onClick={() => {
-                        setValueGioi("");
-                        setValueNganh("");
-                        setValueLop("");
-                        setValueBo("");
-                        setValueHo("");
-                        setValueChi("");
+                        setKingdomID("");
+                        setPhylumnID("");
+                        setClassID("");
+                        setOrderID("");
+                        setFamilyID("");
+                        setGenusID("");
 
                         setInitKingdom("");
                         setInitPhylumn("");
@@ -487,17 +487,17 @@ function UpdateForm() {
                       value={initPhylumn}
                       suffixIcon=""
                       onChange={(value, option) => {
-                        setValueNganh(value);
+                        setPhylumnID(value);
                         setInitPhylumn(option.label);
                         setInitClass("");
                         setInitOrder("");
                         setInitFamily("");
                         setInitGunes("");
 
-                        setValueLop("");
-                        setValueBo("");
-                        setValueHo("");
-                        setValueChi("");
+                        setClassID("");
+                        setOrderID("");
+                        setFamilyID("");
+                        setGenusID("");
                         setErrPhylumn("");
                       }}
                       placeholder="Ngành"
@@ -505,7 +505,7 @@ function UpdateForm() {
                       filterOption={(input, option) =>
                         (option?.label ?? "").includes(input)
                       }
-                      options={nganh.map((item) => {
+                      options={listPhylumn.map((item) => {
                         return {
                           value: item.uuid,
                           parent_id: item.parent_id,
@@ -521,11 +521,11 @@ function UpdateForm() {
                       path={mdiClose}
                       size={1}
                       onClick={() => {
-                        setValueNganh("");
-                        setValueLop("");
-                        setValueBo("");
-                        setValueHo("");
-                        setValueChi("");
+                        setPhylumnID("");
+                        setClassID("");
+                        setOrderID("");
+                        setFamilyID("");
+                        setGenusID("");
 
                         setInitPhylumn("");
                         setInitClass("");
@@ -548,15 +548,15 @@ function UpdateForm() {
                       value={initClass}
                       suffixIcon=""
                       onChange={(value, option) => {
-                        setValueLop(value);
+                        setClassID(value);
                         setInitClass(option.label);
                         setInitOrder("");
                         setInitFamily("");
                         setInitGunes("");
 
-                        setValueBo("");
-                        setValueHo("");
-                        setValueChi("");
+                        setOrderID("");
+                        setFamilyID("");
+                        setGenusID("");
                         setErrClass("");
                       }}
                       placeholder="Lớp"
@@ -564,7 +564,7 @@ function UpdateForm() {
                       filterOption={(input, option) =>
                         (option?.label ?? "").includes(input)
                       }
-                      options={lop.map((item) => {
+                      options={listClass.map((item) => {
                         return {
                           value: item.uuid,
                           parent_id: item.parent_id,
@@ -580,10 +580,10 @@ function UpdateForm() {
                       path={mdiClose}
                       size={1}
                       onClick={() => {
-                        setValueLop("");
-                        setValueBo("");
-                        setValueHo("");
-                        setValueChi("");
+                        setClassID("");
+                        setOrderID("");
+                        setFamilyID("");
+                        setGenusID("");
 
                         setInitClass("");
                         setInitOrder("");
@@ -605,13 +605,13 @@ function UpdateForm() {
                       value={initOrder}
                       suffixIcon=""
                       onChange={(value, option) => {
-                        setValueBo(value);
+                        setOrderID(value);
                         setInitOrder(option.label);
                         setInitFamily("");
                         setInitGunes("");
 
-                        setValueHo("");
-                        setValueChi("");
+                        setFamilyID("");
+                        setGenusID("");
                         setErrOrder("");
                       }}
                       placeholder="Bộ"
@@ -619,7 +619,7 @@ function UpdateForm() {
                       filterOption={(input, option) =>
                         (option?.label ?? "").includes(input)
                       }
-                      options={bo.map((item) => {
+                      options={listOrder.map((item) => {
                         return {
                           value: item.uuid,
                           parent_id: item.parent_id,
@@ -635,9 +635,9 @@ function UpdateForm() {
                       path={mdiClose}
                       size={1}
                       onClick={() => {
-                        setValueBo("");
-                        setValueHo("");
-                        setValueChi("");
+                        setOrderID("");
+                        setFamilyID("");
+                        setGenusID("");
 
                         setInitOrder("");
                         setInitFamily("");
@@ -658,10 +658,10 @@ function UpdateForm() {
                       value={initFamily}
                       suffixIcon=""
                       onChange={(value, option) => {
-                        setValueHo(value);
+                        setFamilyID(value);
                         setInitFamily(option.label);
                         setInitGunes("");
-                        setValueChi("");
+                        setGenusID("");
                         setErrFamily("");
                       }}
                       placeholder="Họ"
@@ -669,7 +669,7 @@ function UpdateForm() {
                       filterOption={(input, option) =>
                         (option?.label ?? "").includes(input)
                       }
-                      options={ho.map((item) => {
+                      options={listFamily.map((item) => {
                         return {
                           value: item.uuid,
                           parent_id: item.parent_id,
@@ -685,8 +685,8 @@ function UpdateForm() {
                       path={mdiClose}
                       size={1}
                       onClick={() => {
-                        setValueHo("");
-                        setValueChi("");
+                        setFamilyID("");
+                        setGenusID("");
                         setInitFamily("");
                         setInitGunes("");
                         setErrFamily("");
@@ -706,7 +706,7 @@ function UpdateForm() {
                       value={initGunes}
                       suffixIcon=""
                       onChange={(value, option) => {
-                        setValueChi(value);
+                        setGenusID(value);
                         setInitGunes(option.label);
                         setErrGenus("");
                       }}
@@ -715,7 +715,7 @@ function UpdateForm() {
                       filterOption={(input, option) =>
                         (option?.label ?? "").includes(input)
                       }
-                      options={chi.map((item) => {
+                      options={listGenus.map((item) => {
                         return {
                           value: item.uuid,
                           label: `${item.ten_khoa_hoc} ${
@@ -730,7 +730,7 @@ function UpdateForm() {
                       path={mdiClose}
                       size={1}
                       onClick={() => {
-                        setValueChi("");
+                        setGenusID("");
                         setInitGunes("");
                         setErrGenus("");
                       }}

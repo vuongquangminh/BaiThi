@@ -22,9 +22,18 @@ const ContextProvider = ({ children }) => {
   }
   const success = (success) => {
     messageApi.open({
-      type: "success",
-      content: success,
+      key,
+      type: 'loading',
+      content: 'Loading...',
     });
+    setTimeout(() => {
+      messageApi.open({
+        key,
+        type: 'success',
+        content: success,
+        duration: 1,
+      });
+    }, 2000);
   };
 
   const error = (error) => {
