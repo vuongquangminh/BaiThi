@@ -9,9 +9,14 @@ import MyDelete from "./MyDelete/MyDelete";
 
 const MyTable = ({ changPage, search }) => {
   const [data, setData] = useState([]);
-  const { setTotal, GetTokenFromLocalStorage, setReloadUser, reloadUser, setKey, SaveTokenToLocalStorage } = useContext(context);
+  const {
+    setTotal,
+    GetTokenFromLocalStorage,
+    reloadUser,
+    SaveTokenToLocalStorage,
+  } = useContext(context);
   const token = GetTokenFromLocalStorage();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const columns = [
     {
       title: " Tên ",
@@ -69,31 +74,33 @@ const MyTable = ({ changPage, search }) => {
       render: () => {
         return (
           <div className="action">
-            <Icon path={mdiPencil} size={1} onClick = {(e) => {
-              let key = e.target.closest("[data-row-key]");
-              key = key.getAttribute("data-row-key");
-              console.log(key);
-              // setKey(key)
-              const getdataOld = async () => {
-                const req = await fetch(`https://wlp.howizbiz.com/api/species/${key}`, {
-                  method: "GET",
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                  },
-                });
-                const res = await req.json();
-                // console.log(res)
-                const jsonString = JSON.stringify(res);
-                SaveTokenToLocalStorage('userEdit', jsonString)
-              };
-              getdataOld();
-              navigate('/loai/chi-tiet')
-              
-            }}/>
-
+            <Icon
+              path={mdiPencil}
+              size={1}
+              onClick={(e) => {
+                let key = e.target.closest("[data-row-key]");
+                key = key.getAttribute("data-row-key");
+                console.log(key);
+                const getdataOld = async () => {
+                  const req = await fetch(
+                    `https://wlp.howizbiz.com/api/species/${key}`,
+                    {
+                      method: "GET",
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                      },
+                    }
+                  );
+                  const res = await req.json();
+                  const jsonString = JSON.stringify(res);
+                  SaveTokenToLocalStorage("userEdit", jsonString);
+                };
+                getdataOld();
+                navigate("/loai/chi-tiet");
+              }}
+            />
             <MyDelete />
-            
           </div>
         );
       },
@@ -125,11 +132,24 @@ const MyTable = ({ changPage, search }) => {
           ),
           tenkhoahoc: item.ten_khoa_hoc,
           gioi: item.kingdom.ten,
-          nganh: item.phylumn.ten == null ? item.phylumn.ten_khoa_hoc : item.phylumn.ten,
-          lop: item.class.ten == null ? item.class.ten_khoa_hoc : item.class.ten,
-          bo: item.order.ten == null ||item.order.ten === "" ? item.order.ten_khoa_hoc : item.order.ten,
-          ho: item.family.ten == null ||item.family.ten === "" ? item.family.ten_khoa_hoc : item.family.ten,
-          chi: item.genus.ten == null ||item.genus.ten === "" ? item.genus.ten_khoa_hoc : item.genus.ten,
+          nganh:
+            item.phylumn.ten == null
+              ? item.phylumn.ten_khoa_hoc
+              : item.phylumn.ten,
+          lop:
+            item.class.ten == null ? item.class.ten_khoa_hoc : item.class.ten,
+          bo:
+            item.order.ten == null || item.order.ten === ""
+              ? item.order.ten_khoa_hoc
+              : item.order.ten,
+          ho:
+            item.family.ten == null || item.family.ten === ""
+              ? item.family.ten_khoa_hoc
+              : item.family.ten,
+          chi:
+            item.genus.ten == null || item.genus.ten === ""
+              ? item.genus.ten_khoa_hoc
+              : item.genus.ten,
         };
       });
       console.log(danhsach);

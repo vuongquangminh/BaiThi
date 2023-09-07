@@ -1,32 +1,21 @@
-import {
-  Button,
-  Checkbox,
-  Col,
-  Form,
-  Input,
-  Pagination,
-  QRCode,
-  Row,
-  Select,
-  Switch,
-} from "antd";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Col, Input, QRCode, Row, Select, Switch } from "antd";
+import Icon from "@mdi/react";
+import { mdiArrowLeft, mdiClose } from "@mdi/js";
+
 import Header from "../../Component/Header/Header";
 import Sidebar from "../../Component/Sidebar/Sidebar";
-import Icon from "@mdi/react";
-import { mdiArrowLeft } from "@mdi/js";
-
-import "./AddNew.scss";
-import { useContext, useEffect, useState } from "react";
 import { context } from "../../Hook/UseContext";
-import { useNavigate } from "react-router-dom";
+import "./AddNew.scss";
 
 function AddNew() {
-  const { GetTokenFromLocalStorage, success, contextHolder } =
-    useContext(context);
+  const { GetTokenFromLocalStorage, success, contextHolder, nam } = useContext(context);
   const token = GetTokenFromLocalStorage("accessToken");
   const userEdit = GetTokenFromLocalStorage("userEdit");
   console.log("jkkkkkk", JSON.parse(userEdit));
 
+  // InitValue Phan loai
   const [initKingdom, setInitKingdom] = useState("");
   const [initPhylumn, setInitPhylumn] = useState("");
   const [initClass, setInitClass] = useState("");
@@ -39,14 +28,15 @@ function AddNew() {
   const [initTenkhoahoc, setInitTenkhoahoc] = useState("");
   const [initNguondulieu, setInitNguondulieu] = useState("");
 
+  // InitValue phan 3
   const [initSachdoNam, setInitSachdoNam] = useState("");
   const [initSachdoTen, setInitSachdoTen] = useState("");
   const [initUicnsNam, setInitUicnsNam] = useState("");
   const [initUicnsTen, setInitUicnsTen] = useState("");
-
   const [initUicnsId, setInitUicnsId] = useState("");
   const [initSachdoId, setInitSachdosId] = useState("");
 
+  // Errors
   const [errTen, setErrTen] = useState(false);
   const [errTenkhoahoc, setErrTenkhoahoc] = useState("");
   const [errKingdom, setErrKingdom] = useState("");
@@ -56,6 +46,7 @@ function AddNew() {
   const [errFamily, setErrFamily] = useState("");
   const [errGenus, setErrGenus] = useState("");
 
+  // List option
   const [gioi, setGioi] = useState([]);
   const [nganh, setNganh] = useState([]);
   const [lop, setLop] = useState([]);
@@ -65,6 +56,7 @@ function AddNew() {
   const [sachDo, setSachdo] = useState([]);
   const [UICN, setUICN] = useState([]);
 
+  //ValueID
   const [valueGioi, setValueGioi] = useState([]);
   const [valueNganh, setValueNganh] = useState([]);
   const [valueLop, setValueLop] = useState([]);
@@ -73,42 +65,9 @@ function AddNew() {
   const [valueChi, setValueChi] = useState([]);
 
   const navigate = useNavigate();
-  const nam = [
-    { nam: "2023" },
-    { nam: "2022" },
-    { nam: "2021" },
-    { nam: "2020" },
-    { nam: "2019" },
-    { nam: "2018" },
-    { nam: "2017" },
-    { nam: "2016" },
-    { nam: "2015" },
-    { nam: "2014" },
-    { nam: "2013" },
-    { nam: "2012" },
-    { nam: "2011" },
-    { nam: "2010" },
-    { nam: "2009" },
-    { nam: "2008" },
-    { nam: "2007" },
-    { nam: "2006" },
-    { nam: "2005" },
-    { nam: "2004" },
-    { nam: "2003" },
-    { nam: "2002" },
-    { nam: "2001" },
-    { nam: "2000" },
-    { nam: "1999" },
-    { nam: "1998" },
-    { nam: "1997" },
-  ];
-  // console.log(initTen, initKingdom)
-  const onChange = (checked) => {
-    console.log(`switch to ${checked}`);
-  };
+
   const handeSubmit = () => {
     const dataPost = {
-      // id: id,
       ten: initTen,
       ten_khoa_hoc: initTenkhoahoc,
       ten_tac_gia: initTentacgia,
@@ -120,7 +79,7 @@ function AddNew() {
       order_id: valueBo,
       family_id: valueHo,
       genus_id: valueChi,
-      iucns: [{ nam:  initUicnsNam, id: initUicnsId }],
+      iucns: [{ nam: initUicnsNam, id: initUicnsId }],
       sach_dos: [{ nam: initSachdoNam, id: initSachdoId }],
       toa_dos: [],
     };
@@ -185,7 +144,6 @@ function AddNew() {
       );
       const res = await req.json();
       setGioi(res);
-      // console.log(res)
     };
     getGioi();
     const getNganh = async () => {
@@ -217,7 +175,6 @@ function AddNew() {
       );
       const res = await req.json();
       const data = res.filter((item) => item.parent_id === valueNganh);
-
       setLop(data);
     };
     getLop();
@@ -234,7 +191,6 @@ function AddNew() {
       );
       const res = await req.json();
       const data = res.filter((item) => item.parent_id === valueLop);
-
       setBo(data);
     };
     getBo();
@@ -251,7 +207,6 @@ function AddNew() {
       );
       const res = await req.json();
       const data = res.filter((item) => item.parent_id === valueBo);
-
       setHo(data);
     };
     getHo();
@@ -271,7 +226,6 @@ function AddNew() {
       setChi(data);
     };
     getChi();
-
     const getSachDo = async () => {
       const req = await fetch(
         "https://wlp.howizbiz.com/api/danhmuccha?ma_danh_mucs[]=REDBOOK"
@@ -286,7 +240,6 @@ function AddNew() {
       );
       const res = await req.json();
       setUICN(res[0].childs);
-      // console.log(res)
     };
     getUICN();
   }, [valueGioi, valueNganh, valueLop, valueBo, valueHo, valueChi]);
@@ -302,9 +255,13 @@ function AddNew() {
           <Col id="contentAdd" flex="auto">
             <div className="headerAdd">
               <div className="topAdd">
-                <Icon path={mdiArrowLeft} size={1.5} onClick={() => {
-                  navigate('/user')
-                }}/>{" "}
+                <Icon
+                  path={mdiArrowLeft}
+                  size={1.5}
+                  onClick={() => {
+                    navigate("/user");
+                  }}
+                />{" "}
                 <p>
                   {" "}
                   THÔNG TIN VỀ HIỆN TRẠNG LOÀI NGUY CẤP, QUÝ, HIẾM CẦN ĐƯỢC ƯU
@@ -391,199 +348,325 @@ function AddNew() {
                     <p>Giới</p> <span className="warning">*</span>
                   </div>
 
-                  <Select
-                    showSearch
-                    value={initKingdom}
-                    onChange={(value, option) => {
-                      setValueGioi(value);
-                      setInitKingdom(option.label);
-                      setInitPhylumn("");
-                      setInitClass("");
-                      setInitOrder("");
-                      setInitFamily("");
-                      setInitGunes("");
-                      setErrKingdom("");
-                    }}
-                    placeholder="Giới"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      (option?.label ?? "").includes(input)
-                    }
-                    options={gioi.map((item) => {
-                      return {
-                        value: item.uuid,
-                        label: `${item.ten_khoa_hoc} ${
-                          item.ten === null || item.ten === ""
-                            ? ""
-                            : "- " + item.ten
-                        }`,
-                      };
-                    })}
-                  />
+                  <div className="bodyInput">
+                    <Select
+                      showSearch
+                      value={initKingdom}
+                      suffixIcon=""
+                      onChange={(value, option) => {
+                        setValueGioi(value);
+                        setInitKingdom(option.label);
+                        setInitPhylumn("");
+                        setInitClass("");
+                        setInitOrder("");
+                        setInitFamily("");
+                        setInitGunes("");
+                        setErrKingdom("");
+
+                        setValueNganh("");
+                        setValueLop("");
+                        setValueBo("");
+                        setValueHo("");
+                        setValueChi("");
+                      }}
+                      placeholder="Giới"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        (option?.label ?? "").includes(input)
+                      }
+                      options={gioi.map((item) => {
+                        return {
+                          value: item.uuid,
+                          label: `${item.ten_khoa_hoc} ${
+                            item.ten === null || item.ten === ""
+                              ? ""
+                              : "- " + item.ten
+                          }`,
+                        };
+                      })}
+                    />
+                    <Icon
+                      path={mdiClose}
+                      size={1}
+                      onClick={() => {
+                        setValueGioi("");
+                        setValueNganh("");
+                        setValueLop("");
+                        setValueBo("");
+                        setValueHo("");
+                        setValueChi("");
+
+                        setInitKingdom("");
+                        setInitPhylumn("");
+                        setInitClass("");
+                        setInitOrder("");
+                        setInitFamily("");
+                        setInitGunes("");
+                        setErrKingdom("");
+                      }}
+                    />
+                  </div>
                   <span>{errKingdom}</span>
                 </div>
                 <div className="inputPhanloai">
                   <div className="sub">
                     <p>Ngành </p> <span className="warning">*</span>
                   </div>
-                  <Select
-                    showSearch
-                    value={initPhylumn}
-                    onChange={(value, option) => {
-                      setValueNganh(value);
-                      setInitPhylumn(option.label);
-                      setInitClass("");
-                      setInitOrder("");
-                      setInitFamily("");
-                      setInitGunes("");
-                      setErrPhylumn("");
-                    }}
-                    placeholder="Ngành"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      (option?.label ?? "").includes(input)
-                    }
-                    options={nganh.map((item) => {
-                      return {
-                        value: item.uuid,
-                        parent_id: item.parent_id,
-                        label: `${item.ten_khoa_hoc} ${
-                          item.ten === null || item.ten === ""
-                            ? ""
-                            : "- " + item.ten
-                        }`,
-                      };
-                    })}
-                  />
+                  <div className="bodyInput">
+                    <Select
+                      showSearch
+                      value={initPhylumn}
+                      suffixIcon=""
+                      onChange={(value, option) => {
+                        setValueNganh(value);
+                        setInitPhylumn(option.label);
+                        setValueLop("");
+                        setValueBo("");
+                        setValueHo("");
+                        setValueChi("");
+
+                        setInitClass("");
+                        setInitOrder("");
+                        setInitFamily("");
+                        setInitGunes("");
+                        setErrPhylumn("");
+                      }}
+                      placeholder="Ngành"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        (option?.label ?? "").includes(input)
+                      }
+                      options={nganh.map((item) => {
+                        return {
+                          value: item.uuid,
+                          parent_id: item.parent_id,
+                          label: `${item.ten_khoa_hoc} ${
+                            item.ten === null || item.ten === ""
+                              ? ""
+                              : "- " + item.ten
+                          }`,
+                        };
+                      })}
+                    />
+                    <Icon
+                      path={mdiClose}
+                      size={1}
+                      onClick={() => {
+                        setValueNganh("");
+                        setValueLop("");
+                        setValueBo("");
+                        setValueHo("");
+                        setValueChi("");
+
+                        setInitPhylumn("");
+                        setInitClass("");
+                        setInitOrder("");
+                        setInitFamily("");
+                        setInitGunes("");
+                        setErrKingdom("");
+                      }}
+                    />
+                  </div>
                   <span>{errPhylumn}</span>
                 </div>
                 <div className="inputPhanloai">
                   <div className="sub">
                     <p>Lớp </p> <span className="warning">*</span>
                   </div>
-                  <Select
-                    showSearch
-                    value={initClass}
-                    onChange={(value, option) => {
-                      setValueLop(value);
-                      setInitClass(option.label);
-                      setInitOrder("");
-                      setInitFamily("");
-                      setInitGunes("");
-                      setErrClass("");
-                    }}
-                    placeholder="Lớp"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      (option?.label ?? "").includes(input)
-                    }
-                    options={lop.map((item) => {
-                      return {
-                        value: item.uuid,
-                        parent_id: item.parent_id,
-                        label: `${item.ten_khoa_hoc} ${
-                          item.ten === null || item.ten === ""
-                            ? ""
-                            : "- " + item.ten
-                        }`,
-                      };
-                    })}
-                  />
+                  <div className="bodyInput">
+                    <Select
+                      showSearch
+                      value={initClass}
+                      suffixIcon=""
+                      onChange={(value, option) => {
+                        setValueLop(value);
+                        setInitClass(option.label);
+
+                        setValueBo("");
+                        setValueHo("");
+                        setValueChi("");
+
+                        setInitOrder("");
+                        setInitFamily("");
+                        setInitGunes("");
+                        setErrClass("");
+                      }}
+                      placeholder="Lớp"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        (option?.label ?? "").includes(input)
+                      }
+                      options={lop.map((item) => {
+                        return {
+                          value: item.uuid,
+                          parent_id: item.parent_id,
+                          label: `${item.ten_khoa_hoc} ${
+                            item.ten === null || item.ten === ""
+                              ? ""
+                              : "- " + item.ten
+                          }`,
+                        };
+                      })}
+                    />
+                    <Icon
+                      path={mdiClose}
+                      size={1}
+                      onClick={() => {
+                        setValueLop("");
+                        setValueBo("");
+                        setValueHo("");
+                        setValueChi("");
+
+                        setInitClass("");
+                        setInitOrder("");
+                        setInitFamily("");
+                        setInitGunes("");
+                        setErrKingdom("");
+                      }}
+                    />
+                  </div>
                   <span>{errClass}</span>
                 </div>
                 <div className="inputPhanloai">
                   <div className="sub">
                     <p>Bộ </p> <span className="warning">*</span>
                   </div>
-                  <Select
-                    showSearch
-                    value={initOrder}
-                    onChange={(value, option) => {
-                      setValueBo(value);
-                      setInitOrder(option.label);
-                      setInitFamily("");
-                      setInitGunes("");
-                      setErrOrder("");
-                    }}
-                    placeholder="Bộ"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      (option?.label ?? "").includes(input)
-                    }
-                    options={bo.map((item) => {
-                      return {
-                        value: item.uuid,
-                        parent_id: item.parent_id,
-                        label: `${item.ten_khoa_hoc} ${
-                          item.ten === null || item.ten === ""
-                            ? ""
-                            : "- " + item.ten
-                        }`,
-                      };
-                    })}
-                  />
+                  <div className="bodyInput">
+                    <Select
+                      showSearch
+                      value={initOrder}
+                      suffixIcon=""
+                      onChange={(value, option) => {
+                        setValueBo(value);
+                        setInitOrder(option.label);
+                        setValueHo("");
+                        setValueChi("");
+
+                        setInitFamily("");
+                        setInitGunes("");
+                        setErrOrder("");
+                      }}
+                      placeholder="Bộ"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        (option?.label ?? "").includes(input)
+                      }
+                      options={bo.map((item) => {
+                        return {
+                          value: item.uuid,
+                          parent_id: item.parent_id,
+                          label: `${item.ten_khoa_hoc} ${
+                            item.ten === null || item.ten === ""
+                              ? ""
+                              : "- " + item.ten
+                          }`,
+                        };
+                      })}
+                    />
+                    <Icon
+                      path={mdiClose}
+                      size={1}
+                      onClick={() => {
+                        setValueBo("");
+                        setValueHo("");
+                        setValueChi("");
+
+                        setInitOrder("");
+                        setInitFamily("");
+                        setInitGunes("");
+                        setErrOrder("");
+                      }}
+                    />
+                  </div>
                   <span>{errOrder}</span>
                 </div>
                 <div className="inputPhanloai">
                   <div className="sub">
                     <p> Họ </p> <span className="warning">*</span>
                   </div>
-                  <Select
-                    showSearch
-                    value={initFamily}
-                    onChange={(value, option) => {
-                      setValueHo(value);
-                      setInitFamily(option.label);
-                      setInitGunes("");
-                      setErrFamily("");
-                    }}
-                    placeholder="Họ"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      (option?.label ?? "").includes(input)
-                    }
-                    options={ho.map((item) => {
-                      return {
-                        value: item.uuid,
-                        parent_id: item.parent_id,
-                        label: `${item.ten_khoa_hoc} ${
-                          item.ten === null || item.ten === ""
-                            ? ""
-                            : "- " + item.ten
-                        }`,
-                      };
-                    })}
-                  />
+                  <div className="bodyInput">
+                    <Select
+                      showSearch
+                      value={initFamily}
+                      suffixIcon=""
+                      onChange={(value, option) => {
+                        setValueHo(value);
+                        setInitFamily(option.label);
+                        setValueChi("");
+                        setInitGunes("");
+                        setErrFamily("");
+                      }}
+                      placeholder="Họ"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        (option?.label ?? "").includes(input)
+                      }
+                      options={ho.map((item) => {
+                        return {
+                          value: item.uuid,
+                          parent_id: item.parent_id,
+                          label: `${item.ten_khoa_hoc} ${
+                            item.ten === null || item.ten === ""
+                              ? ""
+                              : "- " + item.ten
+                          }`,
+                        };
+                      })}
+                    />
+                    <Icon
+                      path={mdiClose}
+                      size={1}
+                      onClick={() => {
+                        setValueHo("");
+                        setValueChi("");
+                        setInitFamily("");
+                        setInitGunes("");
+                        setErrFamily("");
+                      }}
+                    />
+                  </div>
                   <span>{errFamily}</span>
                 </div>
                 <div className="inputPhanloai">
                   <div className="sub">
                     <p>Chi </p> <span className="warning">*</span>
                   </div>
-                  <Select
-                    showSearch
-                    value={initGunes}
-                    onChange={(value, option) => {
-                      setValueChi(value);
-                      setInitGunes(option.label);
-                      setErrGenus("");
-                    }}
-                    placeholder="Chi"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      (option?.label ?? "").includes(input)
-                    }
-                    options={chi.map((item) => {
-                      return {
-                        value: item.uuid,
-                        label: `${item.ten_khoa_hoc} ${
-                          item.ten === null || item.ten === ""
-                            ? ""
-                            : "- " + item.ten
-                        }`,
-                      };
-                    })}
-                  />
+                  <div className="bodyInput">
+                    <Select
+                      showSearch
+                      value={initGunes}
+                      suffixIcon=""
+                      onChange={(value, option) => {
+                        setValueChi(value);
+                        setInitGunes(option.label);
+                        setErrGenus("");
+                      }}
+                      placeholder="Chi"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        (option?.label ?? "").includes(input)
+                      }
+                      options={chi.map((item) => {
+                        return {
+                          value: item.uuid,
+                          label: `${item.ten_khoa_hoc} ${
+                            item.ten === null || item.ten === ""
+                              ? ""
+                              : "- " + item.ten
+                          }`,
+                        };
+                      })}
+                    />
+                    <Icon
+                      path={mdiClose}
+                      size={1}
+                      onClick={() => {
+                        setValueChi("");
+                        setInitGunes("");
+                        setErrGenus("");
+                      }}
+                    />
+                  </div>
                   <span>{errGenus}</span>
                 </div>
               </div>
@@ -594,101 +677,137 @@ function AddNew() {
                 <div className="left3">
                   <div className="head3"> Sách đỏ </div>
                   <div className="bottom3">
-                    <Select
-                      showSearch
-                      value={initSachdoNam}
-                      onChange={(value, option) => {
-                        // setValueGioi(value);
-                        setInitSachdoNam(value);
-                      }}
-                      placeholder="Search to Select"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        (option?.label ?? "").includes(input)
-                      }
-                      options={nam.map((item) => {
-                        return {
-                          value: item.nam,
-                          //   label: `${item.ten_khoa_hoc} - ${item.ten}`,
-                        };
-                      })}
-                    />
-
-                    <Select
-                      showSearch
-                      value={initSachdoTen}
-                      onChange={(value, option) => {
-                        // setValueGioi(value);
-                        setInitSachdoTen(option.label);
-                        setInitSachdosId(option.value);
-                      }}
-                      placeholder="Search to Select"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        (option?.label ?? "").includes(input)
-                      }
-                      options={sachDo.map((item) => {
-                        return {
-                          value: item.id,
-                          label: `${item.ma_danh_muc} ${
-                            item.ten === null || item.ten === ""
-                              ? ""
-                              : "- " + item.ten
-                          }`,
-                        };
-                      })}
-                    />
+                    <div className="bodyInput">
+                      <Select
+                        showSearch
+                        value={initSachdoNam}
+                        suffixIcon=""
+                        onChange={(value, option) => {
+                          setInitSachdoNam(value);
+                        }}
+                        placeholder="Search to Select"
+                        optionFilterProp="children"
+                        filterOption={(input, option) =>
+                          (option?.label ?? "").includes(input)
+                        }
+                        options={nam.map((item) => {
+                          return {
+                            value: item.nam,
+                          };
+                        })}
+                      />
+                      <Icon
+                        path={mdiClose}
+                        size={1}
+                        onClick={() => {
+                          setInitSachdoNam("");
+                        }}
+                      />
+                    </div>
+                    <div className="bodyInput">
+                      <Select
+                        showSearch
+                        value={initSachdoTen}
+                        suffixIcon=""
+                        onChange={(value, option) => {
+                          setInitSachdoTen(option.label);
+                          setInitSachdosId(option.value);
+                        }}
+                        placeholder="Search to Select"
+                        optionFilterProp="children"
+                        filterOption={(input, option) =>
+                          (option?.label ?? "").includes(input)
+                        }
+                        options={sachDo.map((item) => {
+                          return {
+                            value: item.id,
+                            label: `${item.ma_danh_muc} ${
+                              item.ten === null || item.ten === ""
+                                ? ""
+                                : "- " + item.ten
+                            }`,
+                          };
+                        })}
+                      />
+                      <Icon
+                        path={mdiClose}
+                        size={1}
+                        onClick={() => {
+                          setInitSachdoTen("");
+                          setInitSachdosId("");
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="right3">
                   <div className="head3"> IUCN </div>
                   <div className="bottom3">
-                    <Select
-                      showSearch
-                      value={initUicnsNam}
-                      onChange={(value) => {
-                        setInitUicnsNam(value);
-                      }}
-                      placeholder="Search to Select"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        (option?.label ?? "").includes(input)
-                      }
-                      options={nam.map((item) => {
-                        return {
-                          value: item.nam,
-                        };
-                      })}
-                    />
-
-                    <Select
-                      showSearch
-                      value={initUicnsTen}
-                      onChange={(value, option) => {
-                        setInitUicnsTen(option.label);
-                        setInitUicnsId(option.value);
-                      }}
-                      placeholder="Search to Select"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        (option?.label ?? "").includes(input)
-                      }
-                      options={UICN.map((item) => {
-                        return {
-                          value: item.id,
-                          label: `${item.ma_danh_muc} ${
-                            item.ten === null || item.ten === ""
-                              ? ""
-                              : "- " + item.ten
-                          }`,
-                        };
-                      })}
-                    />
+                    <div className="bodyInput">
+                      <Select
+                        showSearch
+                        value={initUicnsNam}
+                        suffixIcon=""
+                        onChange={(value) => {
+                          setInitUicnsNam(value);
+                        }}
+                        placeholder="Search to Select"
+                        optionFilterProp="children"
+                        filterOption={(input, option) =>
+                          (option?.label ?? "").includes(input)
+                        }
+                        options={nam.map((item) => {
+                          return {
+                            value: item.nam,
+                          };
+                        })}
+                      />
+                      <Icon
+                        path={mdiClose}
+                        size={1}
+                        onClick={() => {
+                          setInitUicnsNam("");
+                        }}
+                      />
+                    </div>
+                    <div className="bodyInput">
+                      <Select
+                        showSearch
+                        value={initUicnsTen}
+                        suffixIcon=""
+                        onChange={(value, option) => {
+                          setInitUicnsTen(option.label);
+                          setInitUicnsId(option.value);
+                        }}
+                        placeholder="Search to Select"
+                        optionFilterProp="children"
+                        filterOption={(input, option) =>
+                          (option?.label ?? "").includes(input)
+                        }
+                        options={UICN.map((item) => {
+                          return {
+                            value: item.id,
+                            label: `${item.ma_danh_muc} ${
+                              item.ten === null || item.ten === ""
+                                ? ""
+                                : "- " + item.ten
+                            }`,
+                          };
+                        })}
+                      />
+                      <Icon
+                        path={mdiClose}
+                        size={1}
+                        onClick={() => {
+                          setInitUicnsTen("");
+                          setInitUicnsId("");
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
             <div className="buttonAdd">
               <Button type="primary" htmlType="submit" onClick={handeSubmit}>
                 Thêm mới

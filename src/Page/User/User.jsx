@@ -1,8 +1,7 @@
 import "./User.scss";
-import { Col, Input, Pagination, Popover, Row } from "antd";
+import { Col, Input, Pagination, Row } from "antd";
 import { useContext, useEffect, useState } from "react";
 import MyModal from "../../Component/Modal/Modal";
-import { useNavigate } from "react-router-dom";
 import Icon from "@mdi/react";
 import { mdiMagnify, mdiSheep } from "@mdi/js";
 import MyTable from "./MyTable/MyTable";
@@ -11,13 +10,11 @@ import Header from "../../Component/Header/Header";
 import Sidebar from "../../Component/Sidebar/Sidebar";
 
 function User() {
+  const { total } = useContext(context);
   const [changPage, setChangePage] = useState("page=1&perpage=10");
   const [search, setSearch] = useState("");
-  const [resetCurrentPage, setCurrentPage] = useState(1)
-  const [perpage, setPerpage] = useState(10)
-  const navigate = useNavigate();
-  const { total } = useContext(context);
-
+  const [resetCurrentPage, setCurrentPage] = useState(1);
+  const [perpage, setPerpage] = useState(10);
   useEffect(() => {
     const item = document.querySelectorAll(".sidebar .item");
     item.forEach((i) => {
@@ -53,10 +50,9 @@ function User() {
                     placeholder="Tìm kiếm theo tên"
                     prefix={<Icon path={mdiMagnify} size={1} />}
                     onChange={(e) => {
-                      // console.log(e)
                       setSearch(e.target.value);
                       setChangePage(`page=1&perpage=${perpage}`);
-                      setCurrentPage(1)
+                      setCurrentPage(1);
                     }}
                   />
                 </div>
@@ -78,8 +74,8 @@ function User() {
                 current={resetCurrentPage}
                 onChange={(page, perpage) => {
                   console.log(page + "    " + perpage);
-                  setCurrentPage(page)
-                  setPerpage(perpage)
+                  setCurrentPage(page);
+                  setPerpage(perpage);
                   setChangePage(`page=${page}&perpage=${perpage}`);
                 }}
               />

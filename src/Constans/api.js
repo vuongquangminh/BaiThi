@@ -49,6 +49,5 @@ const YEARS = [
     {nam:'1997'},
   ]
   
-  
   export {EndPoint,URL,YEARS}
   export default Api;

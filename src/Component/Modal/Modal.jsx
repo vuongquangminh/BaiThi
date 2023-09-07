@@ -1,8 +1,8 @@
 import { Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 import "./Modal.scss";
-import { useNavigate } from "react-router-dom";
 
 const MyModal = () => {
   const navigate = useNavigate();

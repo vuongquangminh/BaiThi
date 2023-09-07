@@ -184,7 +184,7 @@
   }
 }
 
-.inputPhanloai >span {
+.inputPhanloai > span {
   color: red;
 }
 
@@ -198,9 +198,39 @@
   font-weight: 600;
   font-size: 16px;
 }
-.ant-row.css-dev-only-do-not-override-190m0jy .ant-col.ant-col-12.css-dev-only-do-not-override-190m0jy:first-child {
+.ant-row.css-dev-only-do-not-override-190m0jy
+  .ant-col.ant-col-12.css-dev-only-do-not-override-190m0jy:first-child {
   padding-right: 8px;
 }
-.ant-row.css-dev-only-do-not-override-190m0jy .ant-col.ant-col-12.css-dev-only-do-not-override-190m0jy:last-child {
+.ant-row.css-dev-only-do-not-override-190m0jy
+  .ant-col.ant-col-12.css-dev-only-do-not-override-190m0jy:last-child {
   padding-left: 8px;
+}
+.bodyInput {
+  display: flex;
+  align-items: center;
+}
+
+.body2 .inputPhanloai {
+  position: relative;
+}
+
+.body2 .inputPhanloai svg {
+  position: absolute;
+  right: 1%;
+  cursor: pointer;
+}
+.bodyInput
+  .ant-select.css-dev-only-do-not-override-190m0jy.ant-select-single.ant-select-show-arrow.ant-select-show-search {
+  flex: 1;
+}
+
+.bottom3 .bodyInput {
+  position: relative;
+}
+
+.bottom3 .bodyInput svg {
+  position: absolute;
+  right: 3px;
+  cursor: pointer;
 }

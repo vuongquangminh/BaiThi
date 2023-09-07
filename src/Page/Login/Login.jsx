@@ -1,21 +1,18 @@
 import { Fragment, useContext, useState } from "react";
-import { context } from "../../Hook/UseContext";
 import { useNavigate } from "react-router-dom";
-import { Button, Input, message, Space } from "antd";
+import { Button, Input } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
+import { context } from "../../Hook/UseContext";
 import "./Login.scss";
 
 function Login() {
-  // localStorage.removeItem('accessToken');
-  const { SaveTokenToLocalStorage, setAuthentication, error, contextHolder } =
-    useContext(context);
-
+  const { SaveTokenToLocalStorage, setAuthentication, error, contextHolder } = useContext(context);
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [userError, setUserError] = useState("");
   const [passError, setPassError] = useState("");
-  const navigate = useNavigate();
 
   const HandleLogin = async () => {
     const url = "https://wlp.howizbiz.com/api/web-authenticate";
@@ -23,7 +20,6 @@ function Login() {
       password: password,
       username: username,
     };
-
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -31,7 +27,6 @@ function Login() {
       },
       body: JSON.stringify(userData),
     });
-
     const data = await response.json();
     console.log(data);
     if (data.access_token) {
@@ -47,10 +42,8 @@ function Login() {
       }
     }
   };
-
   async function MeData(token) {
     const url = "https://wlp.howizbiz.com/api/me";
-
     const response = await fetch(url, {
       method: "GET",
       headers: {
@@ -58,7 +51,6 @@ function Login() {
         "Content-Type": "application/json",
       },
     });
-
     const data = await response.json();
     if (data.user) {
       setAuthentication(true);
@@ -83,7 +75,6 @@ function Login() {
             BẢO VỆ
           </div>
         </header>
-
         <div id="container">
           <div className="form">
             <header>
@@ -104,7 +95,6 @@ function Login() {
                   setUserError("");
                 }}
               />
-
               <p>{userError}</p>
             </div>
             <div className="password">
@@ -120,9 +110,9 @@ function Login() {
               <p>{passError}</p>
             </div>
             <div tabIndex="0" onKeyDown={HandleLogin}>
-            <Button type="primary" block onClick={HandleLogin} >
-              Đăng nhập
-            </Button>
+              <Button type="primary" block onClick={HandleLogin}>
+                Đăng nhập
+              </Button>
             </div>
             <Button type="link" block>
               Quên mật khẩu

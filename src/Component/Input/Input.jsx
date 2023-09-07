@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import "./Input.scss";
 import { context } from "../../Hook/UseContext";
 
@@ -9,12 +9,10 @@ function Input({
   error,
   passwordConfirm,
   type,
-  setType,
   icon,
   onChangeErrors
 }) {
   const { setPasswordsMatch } = useContext(context);
-
   return (
     <div className="group">
       <div className="show">
@@ -30,7 +28,6 @@ function Input({
           }}
         />{" "}
         {icon}
-
       </div>
       <span className="highlight">{error}</span>
       <span className="bar"></span>

@@ -1,18 +1,21 @@
-import './Loading.scss'
+import "./Loading.scss";
 
 function Loading() {
-    return ( <>
-    <div class="loader-1">
-<div class="dot"></div>
-<div class="dot"></div>
-<div class="dot"></div>
-<div class="dot"></div>
-<div class="dot"></div>
-<div class="dot"></div>
-<div class="dot"></div>
-<div class="dot"></div>
-<div class="dot"></div></div>
-    </> );
+  return (
+    <>
+      <div class="loader-1">
+        <div className="dot"></div>
+        <div className="dot"></div>
+        <div className="dot"></div>
+        <div className="dot"></div>
+        <div className="dot"></div>
+        <div className="dot"></div>
+        <div className="dot"></div>
+        <div className="dot"></div>
+        <div className="dot"></div>
+      </div>
+    </>
+  );
 }
 
 export default Loading;

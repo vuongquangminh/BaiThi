@@ -1,24 +1,21 @@
 import React, { useContext, useState } from "react";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 import Icon from "@mdi/react";
 import { mdiDeleteOutline } from "@mdi/js";
 import "./MyDelete.scss";
 import { context } from "../../../../Hook/UseContext";
 const MyDelete = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [key, setKey] = useState('')
-  const [text, setText] = useState('')
-  const { setTotal, GetTokenFromLocalStorage, setReloadUser, reloadUser } =
-    useContext(context);
+  const [key, setKey] = useState("");
+  const [text, setText] = useState("");
+  const { GetTokenFromLocalStorage, setReloadUser } = useContext(context);
   const token = GetTokenFromLocalStorage("accessToken");
   const showModal = (e) => {
     setIsModalOpen(true);
     let key = e.target.closest("[data-row-key]");
-    
-    setText(key.querySelector('.tenCol p').textContent)
+    setText(key.querySelector(".tenCol p").textContent);
     key = key.getAttribute("data-row-key");
-    setKey(key)
-    //
+    setKey(key);
   };
   const handleOk = (e) => {
     setIsModalOpen(false);

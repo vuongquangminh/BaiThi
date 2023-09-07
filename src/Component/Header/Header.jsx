@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 function Header() {
   const navigate = useNavigate();
-
   const content = (
     <div className="inforUser">
       <div className="infor">
@@ -41,9 +40,8 @@ function Header() {
         HỆ THỐNG BÁO CÁO VỀ HIỆN TRẠNG LOÀI NGUY CẤP, QUÝ, HIẾM ĐƯỢC ƯU TIÊN BẢO
         VỆ
       </div>
-
       <div className="user">
-        <Popover className="hihi" content={content} trigger="click">
+        <Popover className="banquanly" content={content} trigger="click">
           <button>
             <span>B</span>
             <span>Ban quản lý dự án </span>
