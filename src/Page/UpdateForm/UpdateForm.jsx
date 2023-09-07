@@ -25,7 +25,7 @@ function UpdateForm() {
     useContext(context);
   const token = GetTokenFromLocalStorage("accessToken");
   const userEdit = GetTokenFromLocalStorage("userEdit");
-  console.log("jkkkkkk", JSON.parse(userEdit));
+  // console.log("jkkkkkk", JSON.parse(userEdit));
   const dataEdit = JSON.parse(userEdit);
   const [oldData, setOldData] = useState({});
   
@@ -53,8 +53,16 @@ function UpdateForm() {
     setValueHo(dataEdit.family_id);
     setValueChi(dataEdit.genus_id);
 
+    setInitSachdoNam(dataEdit.sach_dos[0] ? dataEdit.sach_dos[0].pivot.nam : '' )
+    setInitSachdoId(dataEdit.sach_dos[0] ? dataEdit.sach_dos[0].id : '')
+    setInitSachdoTen(dataEdit.sach_dos[0] ? dataEdit.sach_dos[0].ma_danh_muc + ' - ' + dataEdit.sach_dos[0].ten : "")
+
+    setInitUicnsNam(dataEdit.iucns[0] ? dataEdit.iucns[0].pivot.nam : "")
+    setInitUicnsId(dataEdit.iucns[0] ? dataEdit.iucns[0].id : '')
+    setInitUicnsTen(dataEdit.iucns[0] ? dataEdit.iucns[0].ma_danh_muc + " - " + dataEdit.iucns[0].ten : "")
+
   }, [userEdit]);
-  console.log("oldData", oldData);
+  // console.log("oldData", oldData);
   const [initKingdom, setInitKingdom] = useState("");
   const [initPhylumn, setInitPhylumn] = useState("");
   const [initClass, setInitClass] = useState("");
@@ -73,7 +81,7 @@ function UpdateForm() {
   const [initUicnsTen, setInitUicnsTen] = useState("");
 
   const [initUicnsId, setInitUicnsId] = useState("");
-  const [initSachdoId, setInitSachdosId] = useState("");
+  const [initSachdoId, setInitSachdoId] = useState("");
 
   const [id, setId] = useState("");
 
@@ -151,8 +159,8 @@ function UpdateForm() {
       order_id: valueBo,
       family_id: valueHo,
       genus_id: valueChi,
-      iucns: [{ nam: initSachdoNam, id: initUicnsId }],
-      sach_dos: [{ nam: initUicnsNam, id: initSachdoId }],
+      iucns: [{ nam: initUicnsNam, id: initUicnsId }],
+      sach_dos: [{ nam: initSachdoNam, id: initSachdoId }],
       toa_dos: [],
     };
     console.log(dataPost);
@@ -655,6 +663,7 @@ function UpdateForm() {
                       onChange={(value, option) => {
                         // setValueGioi(value);
                         setInitSachdoNam(value);
+                        // console.log(value, option)
                       }}
                       placeholder="Search to Select"
                       optionFilterProp="children"
@@ -673,9 +682,10 @@ function UpdateForm() {
                       showSearch
                       value={initSachdoTen}
                       onChange={(value, option) => {
-                        // setValueGioi(value);
+                        console.log(value, option);
                         setInitSachdoTen(option.label);
-                        setInitSachdosId(option.value);
+                        // setInitSachdosTen
+                        setInitSachdoId(option.value);
                       }}
                       placeholder="Search to Select"
                       optionFilterProp="children"

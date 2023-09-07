@@ -138,15 +138,17 @@ const MyTable = ({ changPage, search }) => {
     getdata();
   }, [changPage, search, reloadUser]);
   return (
-    <Table
-      columns={columns}
-      dataSource={data}
-      pagination={false}
-      scroll={{
-        y: "100vh",
-        x: "100vh",
-      }}
-    />
+    <>
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={false}
+        scroll={{
+          y: "100vh",
+          x: "100vh",
+        }}
+      />
+    </>
   );
 };
 export default MyTable;
